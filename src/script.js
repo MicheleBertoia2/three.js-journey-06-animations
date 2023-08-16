@@ -1,4 +1,5 @@
 import * as THREE from 'three'
+import gsap from 'gsap'
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -35,6 +36,10 @@ renderer.setSize(sizes.width, sizes.height)
 //CLock with three.js
 const clock = new THREE.Clock()
 
+//animate with  gsap (internal tick so in our tick function only have to render )
+gsap.to(mesh.position, {duration: 1, delay:  1, x: 2})
+gsap.to(mesh.position, {duration: 1, delay:  2, x: 0})
+
 //animations
 const tick = () => {
     //Time with js function to animate at the same speed regardless of pc framerate
@@ -46,7 +51,16 @@ const tick = () => {
     const elapsedTime = clock.getElapsedTime()
     
     //Update objects
-    mesh.rotation.x = elapsedTime  * Math.PI * 2 //revolution every second
+    //mesh.rotation.x = elapsedTime  * Math.PI * 2 //revolution every second
+
+    //doing circles with math 
+    // mesh.position.x = Math.sin(elapsedTime)
+    // mesh.position.y = Math.cos(elapsedTime)
+
+    //  camera.position.x = Math.sin(elapsedTime)
+    //  camera.position.y = Math.cos(elapsedTime)
+    //  camera.lookAt(mesh.position)
+
 
     //render
     renderer.render(scene, camera)
